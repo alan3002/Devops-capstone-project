@@ -1,0 +1,31 @@
+module "vpc" {
+  source = "./modules/vpc"
+}
+
+module "ecr" {
+  source = "./modules/ecr"
+
+  frontend_repo_name = "devops-frontend"
+  backend_repo_name  = "devops-backend"
+}
+module "eks" {
+  source = "./modules/eks"
+
+  cluster_name    = "devops-eks"
+  cluster_version = "1.33"
+
+  vpc_id     = module.vpc.vpc_id
+  subnet_ids = module.vpc.private_subnet_ids
+}
+module "rds" {
+  source = "./modules/rds"
+
+  vpc_id             = module.vpc.vpc_id
+  private_subnet_ids = module.vpc.private_subnet_ids
+  db_password        = var.db_password
+}
+module "github_oidc" {
+  source = "./modules/github-oidc"
+
+  github_repo = "alan3002/Devops-capstone-project"
+}
