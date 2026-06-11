@@ -19,7 +19,7 @@ def api():
 @app.route("/health")
 def health():
     return jsonify({
-        "status": "healthy"
+        "status": "healthyy"
     })
 
 @app.route("/db")
