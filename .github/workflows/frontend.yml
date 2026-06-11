@@ -3,7 +3,7 @@ name: Frontend CI
 on:
   push:
     paths:
-      - "app/frontend/**"
+      - "app/**"
 
 jobs:
   build:
