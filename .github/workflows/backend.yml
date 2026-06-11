@@ -20,13 +20,8 @@ jobs:
 
       - uses: aws-actions/amazon-ecr-login@v2
 
-      - run: |
-          docker build -t devops-backend ./app/backend
+      - run: docker build -t devops-backend ./app/backend
 
-      - run: |
-          docker tag devops-backend:latest \
-          622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-backend:latest
+      - run: docker tag devops-backend:latest 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-backend:v1
 
-      - run: |
-          docker push \
-          622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-backend:latest
+      - run: docker push 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-backend:v1

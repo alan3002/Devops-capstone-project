@@ -22,6 +22,6 @@ jobs:
 
       - run: docker build -t devops-frontend ./app/frontend
 
-      - run: docker tag devops-frontend:latest 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-frontend:latest
+      - run: docker tag devops-frontend:latest 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-frontend:v1
 
-      - run: docker push 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-frontend:latest
+      - run: docker push 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-frontend:v1
