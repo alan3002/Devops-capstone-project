@@ -41,6 +41,13 @@ output "rds_endpoint" {
 output "rds_db_name" {
   value = module.rds.rds_db_name
 }
-output "github_actions_role_arn" {
-  value = module.github_oidc.github_actions_role_arn
+output "lambda_function_name" {
+  value = module.lambda_s3.lambda_function_name
+}
+
+output "s3_bucket_name" {
+  value = module.lambda_s3.s3_bucket_name
+}
+output "loki_bucket_name" {
+  value = module.loki_s3.loki_bucket_name
 }

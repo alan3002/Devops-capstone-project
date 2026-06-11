@@ -1,0 +1,26 @@
+loki:
+  serviceAccount:
+    create: false
+    name: loki
+
+  config:
+    auth_enabled: false
+
+    schema_config:
+      configs:
+        - from: "2024-01-01"
+          store: boltdb-shipper
+          object_store: s3
+          schema: v11
+          index:
+            prefix: loki_index_
+            period: 24h
+
+    storage_config:
+      aws:
+        s3: s3://us-east-1/devops-loki-logs-622488711452
+
+      boltdb_shipper:
+        active_index_directory: /data/loki/index
+        cache_location: /data/loki/cache
+        shared_store: s3
