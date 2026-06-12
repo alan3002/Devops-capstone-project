@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: devops-staging:apps/Deployment:staging/backend
+    deployment.kubernetes.io/revision: "3"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"argocd.argoproj.io/tracking-id":"devops-staging:apps/Deployment:staging/backend"},"name":"backend","namespace":"staging"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"backend"}},"template":{"metadata":{"labels":{"app":"backend"}},"spec":{"containers":[{"env":[{"name":"DB_HOST","value":"devops-master-mysql.ci3iec00ihu7.us-east-1.rds.amazonaws.com"},{"name":"DB_NAME","value":"appdb"},{"name":"DB_USER","value":"adminuser"},{"name":"DB_PASSWORD","value":"UseStrongPassword123!"},{"name":"S3_BUCKET","value":"devops-master-lambda-trigger-bucket-622488711452"}],"image":"622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-backend:v2","name":"backend","ports":[{"containerPort":5000}],"resources":{"limits":{"cpu":"500m","memory":"256Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}}]}}}}
+  creationTimestamp: "2026-06-11T11:10:21Z"
+  generation: 45
+  name: backend
+  namespace: staging
+  resourceVersion: "886010"
+  uid: 0e42c61b-10ec-476a-89a8-32abcdf1b333
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: backend
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/restartedAt: "2026-06-12T07:37:53Z"
+      creationTimestamp: null
+      labels:
+        app: backend
+    spec:
+      containers:
+      - env:
+        - name: DB_HOST
+          value: devops-master-mysql.ci3iec00ihu7.us-east-1.rds.amazonaws.com
+        - name: DB_NAME
+          value: appdb
+        - name: DB_USER
+          value: adminuser
+        - name: DB_PASSWORD
+          value: UseStrongPassword123!
+        - name: S3_BUCKET
+          value: devops-master-lambda-trigger-bucket-622488711452
+        image: 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-backend:v2
+        imagePullPolicy: IfNotPresent
+        name: backend
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 2
+  conditions:
+  - lastTransitionTime: "2026-06-12T07:51:27Z"
+    lastUpdateTime: "2026-06-12T08:00:22Z"
+    message: ReplicaSet "backend-676954bb65" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2026-06-12T08:15:31Z"
+    lastUpdateTime: "2026-06-12T08:15:31Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 45
+  readyReplicas: 2
+  replicas: 2
+  updatedReplicas: 2

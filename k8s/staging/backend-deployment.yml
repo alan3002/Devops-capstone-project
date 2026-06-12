@@ -17,6 +17,7 @@ spec:
         app: backend
 
     spec:
+      serviceAccountName: backend-sa
       containers:
       - name: backend
         image: 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-backend:v2
