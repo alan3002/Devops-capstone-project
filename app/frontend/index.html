@@ -7,29 +7,13 @@
 
 <h1>DevOps Master Project</h1>
 
-<h2>Backend API Test</h2>
-
-<button onclick="getMessage()">
-    Call Backend API
-</button>
-
-<p id="apiResult"></p>
-
-<hr>
-
 <h2>User Registration</h2>
 
-<input
-    type="text"
-    id="name"
-    placeholder="Enter Name">
+<input type="text" id="name" placeholder="Enter Name">
 
 <br><br>
 
-<input
-    type="email"
-    id="email"
-    placeholder="Enter Email">
+<input type="email" id="email" placeholder="Enter Email">
 
 <br><br>
 
@@ -40,41 +24,16 @@
 <p id="registerResult"></p>
 
 <script>
-
-async function getMessage() {
-
-    try {
-
-        const response = await fetch("/api");
-        const data = await response.json();
-
-        document.getElementById("apiResult").innerText =
-            data.message;
-
-    } catch (error) {
-
-        document.getElementById("apiResult").innerText =
-            "Backend not reachable";
-    }
-}
-
 async function registerUser() {
-
-    const name =
-        document.getElementById("name").value;
-
-    const email =
-        document.getElementById("email").value;
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
 
     try {
-
         const response = await fetch("/register", {
             method: "POST",
-
             headers: {
                 "Content-Type": "application/json"
             },
-
             body: JSON.stringify({
                 name: name,
                 email: email
@@ -84,15 +43,13 @@ async function registerUser() {
         const data = await response.json();
 
         document.getElementById("registerResult").innerText =
-            JSON.stringify(data);
+            data.message || JSON.stringify(data);
 
     } catch (error) {
-
         document.getElementById("registerResult").innerText =
-            "Registration has failed";
+            "Registration failed";
     }
 }
-
 </script>
 
 </body>
