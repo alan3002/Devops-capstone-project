@@ -43,8 +43,8 @@ jobs:
 
       - name: Tag Frontend Image
         run: |
-          docker tag devops-frontend:latest 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-frontend:v3
+          docker tag devops-frontend:latest 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-frontend:v4
 
       - name: Push Frontend Image
         run: |
-          docker push 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-frontend:v3
+          docker push 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-frontend:v4
