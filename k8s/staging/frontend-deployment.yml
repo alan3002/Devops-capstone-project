@@ -3,18 +3,24 @@ kind: Deployment
 metadata:
   name: frontend
   namespace: staging
+
 spec:
   replicas: 2
+
   selector:
     matchLabels:
       app: frontend
+
   template:
     metadata:
       labels:
         app: frontend
+
     spec:
       containers:
       - name: frontend
         image: 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-frontend:v2
+        imagePullPolicy: Always
+
         ports:
         - containerPort: 80
