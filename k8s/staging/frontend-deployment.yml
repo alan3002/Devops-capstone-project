@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-frontend:v2
+        image: 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-frontend:v3
         imagePullPolicy: Always
 
         ports:
