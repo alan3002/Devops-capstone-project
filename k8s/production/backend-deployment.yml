@@ -3,25 +3,49 @@ kind: Deployment
 metadata:
   name: backend
   namespace: production
+
 spec:
   replicas: 2
+
   selector:
     matchLabels:
       app: backend
+
   template:
     metadata:
       labels:
         app: backend
+
     spec:
+      serviceAccountName: backend-sa
       containers:
       - name: backend
-        image: 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-backend:v1
+        image: 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-backend:v2
+
         ports:
         - containerPort: 5000
+
+        env:
+        - name: DB_HOST
+          value: "devops-master-mysql.ci3iec00ihu7.us-east-1.rds.amazonaws.com"
+
+        - name: DB_NAME
+          value: "appdb"
+
+        - name: DB_USER
+          value: "adminuser"
+
+        - name: DB_PASSWORD
+          value: "UseStrongPassword123!"
+
+        - name: S3_BUCKET
+          value: "devops-master-lambda-trigger-bucket-622488711452"
+
         resources:
           requests:
             cpu: "100m"
             memory: "128Mi"
+
           limits:
             cpu: "500m"
             memory: "256Mi"
