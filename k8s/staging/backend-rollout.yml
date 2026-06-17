@@ -22,23 +22,22 @@ spec:
     metadata:
       labels:
         app: backend-rollout-demo
+
     spec:
       serviceAccountName: backend-sa
+
       containers:
       - name: backend
         image: 622488711452.dkr.ecr.us-east-1.amazonaws.com/devops-backend:v2
+
         ports:
         - containerPort: 5000
 
+        envFrom:
+        - secretRef:
+            name: backend-db-secret
+
         env:
-        - name: DB_HOST
-          value: "devops-master-mysql.ci3iec00ihu7.us-east-1.rds.amazonaws.com"
-        - name: DB_NAME
-          value: "appdb"
-        - name: DB_USER
-          value: "adminuser"
-        - name: DB_PASSWORD
-          value: "UseStrongPassword123!"
         - name: S3_BUCKET
           value: "devops-master-lambda-trigger-bucket-622488711452"
 
@@ -49,16 +48,3 @@ spec:
           limits:
             cpu: "500m"
             memory: "256Mi"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: backend-rollout-demo-service
-  namespace: staging
-spec:
-  type: ClusterIP
-  selector:
-    app: backend-rollout-demo
-  ports:
-  - port: 5000
-    targetPort: 5000
